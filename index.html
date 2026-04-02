@@ -231,6 +231,56 @@
             .about-label {
                 font-size: 0.75rem;
             }
+            
+            /* === MOBILE ABOUT SECTION ANIMATIONS === */
+            /* Single column layout */
+            #about .grid {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            /* Profile image - centered, full width, at top */
+            #about .sticky-profile {
+                position: relative !important;
+                top: 0 !important;
+                margin-bottom: 0;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            #about .profile-image-container {
+                max-width: 280px;
+                width: 100%;
+                margin: 0 auto;
+            }
+            
+            /* Card container - proper spacing */
+            #about .space-y-8 {
+                margin-top: 0;
+                width: 100%;
+            }
+            
+            /* Individual card base styles - hidden until animated */
+            #about .about-card {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+                will-change: transform, opacity;
+            }
+            
+            /* Animated state when card becomes visible */
+            #about .about-card.animate-in {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            
+            /* Card hover effect on mobile */
+            #about .about-card:hover {
+                transform: translateY(-4px);
+                transition: transform 0.3s ease;
+            }
         }
         
         /* Extra small devices */
@@ -1047,6 +1097,72 @@
         });
     })();
     
+    // ===== MOBILE ABOUT SECTION CARD ANIMATIONS =====
+    function initMobileCardAnimations() {
+        // Check if we're on mobile
+        if (window.innerWidth > 768) return;
+        
+        // Select all about cards within the about section
+        const aboutCards = document.querySelectorAll('#about .about-card');
+        
+        if (!aboutCards.length) return;
+        
+        // Set initial styles for cards (already handled by CSS)
+        // Add stagger delay classes or handle via Intersection Observer with delay
+        
+        // Create Intersection Observer
+        const observerOptions = {
+            threshold: 0.2,        // Trigger when 20% of card is visible
+            rootMargin: '0px 0px -20px 0px'  // Slight offset for better timing
+        };
+        
+        const delayIncrement = 120; // milliseconds between each card
+        
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const card = entry.target;
+                    const cardIndex = Array.from(aboutCards).indexOf(card);
+                    
+                    // Add staggered delay based on card position
+                    const delay = cardIndex * delayIncrement;
+                    
+                    setTimeout(() => {
+                        card.classList.add('animate-in');
+                    }, delay);
+                    
+                    // Unobserve after animation is triggered
+                    cardObserver.unobserve(card);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe each about card
+        aboutCards.forEach(card => {
+            cardObserver.observe(card);
+        });
+        
+        // Handle window resize - reinitialize if switching from desktop to mobile
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (window.innerWidth <= 768) {
+                    // Reset and re-observe cards
+                    aboutCards.forEach(card => {
+                        card.classList.remove('animate-in');
+                        cardObserver.observe(card);
+                    });
+                } else {
+                    // On desktop, remove animations
+                    aboutCards.forEach(card => {
+                        card.classList.remove('animate-in');
+                    });
+                }
+            }, 250);
+        });
+    }
+    
     // Draggable Skills - Touch optimized for mobile
     const draggableSkillsList = ["Web Development", "UI-UX Design", "Data Analysis", "Embedded Engineering", "Network Engineering", "IT Support", "Wireframing", "Prototyping", "Graphics Design"];
     const skillSolidColors = ["#3B82F6", "#8B5CF6", "#10B981", "#F97316", "#EF4444", "#EC4899", "#14B8A6", "#6366F1", "#EAB308", "#06B6D4", "#A855F7", "#F43F5E"];
@@ -1293,6 +1409,9 @@
     }
     updateIST();
     setInterval(updateIST, 1000);
+    
+    // Initialize mobile card animations
+    initMobileCardAnimations();
 </script>
 </body>
 </html>
