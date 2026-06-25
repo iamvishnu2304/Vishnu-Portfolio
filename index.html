@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>Vishnu C | AI Explorer & UI/UX Designer</title>
     <!-- Google Fonts + Tailwind + Font Awesome -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -171,6 +171,7 @@
             border-radius: 22px;
         }
         
+        /* ========== ENHANCED MOBILE OPTIMIZATIONS ========== */
         @media (max-width: 768px) {
             .sticky-profile {
                 position: relative;
@@ -184,6 +185,130 @@
             .tool-icon-moving img {
                 width: 28px;
                 height: 28px;
+            }
+            /* Mobile nav improvements */
+            .glass-nav {
+                width: 92%;
+            }
+            .nav-link, .mobile-nav-link {
+                padding: 8px 0;
+                display: inline-block;
+            }
+            button, a {
+                cursor: pointer;
+                touch-action: manipulation;
+            }
+            .resume-btn {
+                padding: 10px 24px;
+                font-size: 0.9rem;
+            }
+            .glass-card {
+                border-radius: 20px;
+            }
+            .social-icon-circle {
+                width: 44px;
+                height: 44px;
+            }
+            /* Better touch targets for mobile */
+            .project-btn, .linkedin-btn {
+                padding: 8px 0;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+            .hero-pill {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 6px 16px;
+            }
+            h1 {
+                font-size: 1.75rem !important;
+                line-height: 1.3 !important;
+            }
+            .gradient-text {
+                font-size: 2rem !important;
+            }
+            .about-label {
+                font-size: 0.75rem;
+            }
+            
+            /* === MOBILE ABOUT SECTION ANIMATIONS === */
+            /* Single column layout */
+            #about .grid {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            /* Profile image - centered, full width, at top */
+            #about .sticky-profile {
+                position: relative !important;
+                top: 0 !important;
+                margin-bottom: 0;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            
+            #about .profile-image-container {
+                max-width: 280px;
+                width: 100%;
+                margin: 0 auto;
+            }
+            
+            /* Card container - proper spacing */
+            #about .space-y-8 {
+                margin-top: 0;
+                width: 100%;
+            }
+            
+            /* Individual card base styles - hidden until animated */
+            #about .about-card {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+                will-change: transform, opacity;
+            }
+            
+            /* Animated state when card becomes visible */
+            #about .about-card.animate-in {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            
+            /* Card hover effect on mobile */
+            #about .about-card:hover {
+                transform: translateY(-4px);
+                transition: transform 0.3s ease;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .container-padding {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .hero-pill {
+                gap: 6px;
+            }
+            .hero-pill span {
+                font-size: 0.7rem;
+            }
+            .role-container {
+                height: 24px;
+            }
+            .role-item {
+                height: 24px;
+                line-height: 24px;
+                font-size: 0.75rem;
+            }
+            @keyframes slideUp {
+                0%, 20% { transform: translateY(0); }
+                25%, 45% { transform: translateY(-24px); }
+                50%, 70% { transform: translateY(-48px); }
+                75%, 95% { transform: translateY(-72px); }
+                100% { transform: translateY(0); }
             }
         }
         
@@ -207,7 +332,7 @@
             transform: translateY(0);
         }
         
-        /* Skills container */
+        /* Skills container - Touch optimized */
         .skills-drag-container {
             position: relative;
             width: 100%;
@@ -222,6 +347,7 @@
             overflow: hidden;
             cursor: crosshair;
             padding: 20px;
+            touch-action: none; /* Better touch dragging */
         }
         .skills-drag-container::before {
             content: '';
@@ -262,6 +388,7 @@
             border: 1px solid rgba(255, 255, 255, 0.25);
             text-align: center;
             font-family: 'Satoshi', 'Inter', sans-serif;
+            touch-action: none; /* Enable touch dragging */
         }
         .skill-pill-draggable:active {
             cursor: grabbing;
@@ -347,6 +474,14 @@
             border-radius: 32px;
             padding: 48px;
         }
+        @media (max-width: 768px) {
+            .linkedin-showcase {
+                padding: 24px;
+            }
+            .showcase-description {
+                font-size: 1.5rem !important;
+            }
+        }
         .showcase-description {
             font-size: 2rem;
             line-height: 1.3;
@@ -378,6 +513,11 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .linkedin-screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         .hero-pill {
             position: relative;
@@ -620,7 +760,7 @@
             }
         }
         
-        /* ===== LINE WAVE CURSOR ANIMATION - UPDATED: FULL WHITE COLOR ===== */
+        /* ===== CUSTOM CURSOR - WHITE FLOWING LINE (DESKTOP ONLY) ===== */
         canvas#cursor-wave-canvas {
             position: fixed;
             top: 0;
@@ -655,7 +795,7 @@
             <a href="#projects" class="nav-link hover:text-orange-400 transition">Work</a>
             <a href="#contact" class="nav-link hover:text-orange-400 transition">Contact</a>
         </div>
-        <button id="menuBtn" class="md:hidden text-white text-2xl focus:outline-none">
+        <button id="menuBtn" class="md:hidden text-white text-2xl focus:outline-none" aria-label="Menu">
             <i class="fas fa-bars"></i>
         </button>
         <div class="hidden md:block w-6"></div>
@@ -663,7 +803,7 @@
 </nav>
 
 <div id="mobileMenu" class="fixed top-0 right-0 h-full w-64 glass-nav backdrop-blur-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col p-8 gap-6">
-    <button id="closeMenu" class="self-end text-2xl text-white"><i class="fas fa-times"></i></button>
+    <button id="closeMenu" class="self-end text-2xl text-white" aria-label="Close"><i class="fas fa-times"></i></button>
     <a href="#home" class="mobile-nav-link text-lg text-white hover:text-orange-400">Home</a>
     <a href="#about" class="mobile-nav-link text-lg text-white hover:text-orange-400">About</a>
     <a href="#skills" class="mobile-nav-link text-lg text-white hover:text-orange-400">Skills</a>
@@ -735,7 +875,7 @@
     <section id="skills" class="py-20 fade-up">
         <div class="skills-header">
             <h2>Areas where I'm Skilled at</h2>
-            <p><i class="fas fa-arrows-alt"></i> Drag and play with the pills — move them anywhere!</p>
+            <p><i class="fas fa-arrows-alt"></i> Drag and play with the pills — move them anywhere! (Touch & drag on mobile)</p>
         </div>
         <div class="skills-drag-container" id="skillsDragContainer">
             <div class="drag-instruction"><i class="fas fa-hand-pointer"></i> Click & Drag to move</div>
@@ -801,7 +941,7 @@
                         <a href="https://www.linkedin.com/in/vishnu2304/" target="_blank" class="social-icon-circle social-linkedin"><i class="fab fa-linkedin text-white/80 text-xl md:text-2xl"></i></a>
                         <a href="https://github.com/iamvishnu2304" target="_blank" class="social-icon-circle social-github"><i class="fab fa-github text-white/80 text-xl md:text-2xl"></i></a>
                         <a href="https://www.behance.net/vishnuc26" target="_blank" class="social-icon-circle social-behance"><i class="fab fa-behance text-white/80 text-xl md:text-2xl"></i></a>
-                        <a href="https://www.instagram.com/i_am_vishnu_._._/" target="_blank" class="social-icon-circle social-instagram"><i class="fab fa-instagram text-white/80 text-xl md:text-2xl"></i></a>
+                        <a href="https://www.instagram.com/i_am_vishnu_._._./" target="_blank" class="social-icon-circle social-instagram"><i class="fab fa-instagram text-white/80 text-xl md:text-2xl"></i></a>
                     </div>
                     <div class="pt-2">
                         <div class="live-time-badge inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-mono text-gray-300 border border-orange-400/30 bg-black/20 backdrop-blur-sm">
@@ -843,8 +983,8 @@
 <footer class="text-center py-8 text-gray-500 border-t border-white/5 text-sm">© 2026 Vishnu</footer>
 
 <script>
-    // ===== LINE WAVE CURSOR ANIMATION - UPDATED: FULL WHITE COLOR =====
-    (function() {
+    // ===== CUSTOM CURSOR: PURE WHITE FLOWING LINE (DESKTOP ONLY) =====
+    (function initCustomCursor() {
         if (window.innerWidth <= 768) return;
         
         const canvas = document.getElementById('cursor-wave-canvas');
@@ -852,9 +992,9 @@
         
         let ctx = canvas.getContext('2d');
         let points = [];
-        let mouseX = 0, mouseY = 0;
-        let lastX = 0, lastY = 0;
-        let animationRunning = true;
+        let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+        let lastX = mouseX, lastY = mouseY;
+        let animationId = null;
         
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -870,85 +1010,70 @@
         });
         
         function addPoint(x, y) {
-            points.unshift({ x: x, y: y, alpha: 1.0, size: 12 });
-            if (points.length > 35) points.pop();
+            points.unshift({ x, y, alpha: 1.0, width: 3.5 });
+            if (points.length > 30) points.pop();
         }
         
         function updatePoints() {
             for (let i = 0; i < points.length; i++) {
-                points[i].alpha *= 0.92;
-                points[i].size = 12 * points[i].alpha + 2;
+                points[i].alpha *= 0.88;
+                points[i].width = 3.2 * points[i].alpha + 0.6;
             }
-            points = points.filter(p => p.alpha > 0.05);
+            points = points.filter(p => p.alpha > 0.08);
         }
         
-        function drawWave() {
+        function drawFlowLine() {
             if (!ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             if (points.length < 2) return;
+            
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = "rgba(255, 255, 255, 0.6)";
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
             
             for (let i = 0; i < points.length - 1; i++) {
                 const p1 = points[i];
                 const p2 = points[i + 1];
                 const opacity = p1.alpha * 0.9;
-                const lineWidth = Math.max(2.5, 9 * p1.alpha);
-                
-                // FULL WHITE gradient (pure white with varying opacity)
                 const gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
                 gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
-                gradient.addColorStop(0.5, `rgba(255, 255, 255, ${opacity * 0.95})`);
-                gradient.addColorStop(1, `rgba(255, 255, 255, ${opacity * 0.85})`);
+                gradient.addColorStop(1, `rgba(255, 255, 245, ${opacity * 0.85})`);
                 
                 ctx.beginPath();
+                const cpX = (p1.x + p2.x) / 2;
+                const cpY = (p1.y + p2.y) / 2;
                 ctx.moveTo(p1.x, p1.y);
-                ctx.lineTo(p2.x, p2.y);
+                ctx.quadraticCurveTo(cpX, cpY, p2.x, p2.y);
                 ctx.strokeStyle = gradient;
-                ctx.lineWidth = lineWidth;
-                ctx.lineCap = 'round';
+                ctx.lineWidth = Math.min(4.5, Math.max(1.8, p1.width));
                 ctx.stroke();
             }
             
-            // Draw glowing dots with white color scheme
-            for (let i = 0; i < points.length; i++) {
-                const p = points[i];
-                const glowSize = p.size * 0.8;
-                const alpha = p.alpha * 0.8;
-                
-                // Outer glow (white)
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, glowSize + 3, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.4})`;
-                ctx.fill();
-                
-                // Inner core (bright white)
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, glowSize * 0.7, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.9})`;
-                ctx.fill();
-                
-                // Center spark (pure white)
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, glowSize * 0.35, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-                ctx.fill();
+            for (let p of points) {
+                if (p.alpha > 0.2) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.width * 0.5, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha * 0.5})`;
+                    ctx.fill();
+                }
             }
+            ctx.shadowBlur = 0;
         }
         
-        let lastTime = 0;
         let targetX = mouseX, targetY = mouseY;
         
-        function animate() {
-            if (!animationRunning) return;
+        function animateTrail() {
             targetX = mouseX;
             targetY = mouseY;
             const distance = Math.hypot(lastX - targetX, lastY - targetY);
-            if (distance > 3 && targetX > 0 && targetY > 0) {
-                const steps = Math.min(Math.floor(distance / 6) + 1, 4);
-                for (let i = 0; i < steps; i++) {
+            if (distance > 2 && targetX > 0 && targetY > 0) {
+                const steps = Math.min(Math.floor(distance / 5) + 1, 5);
+                for (let i = 0; i <= steps; i++) {
                     const t = i / steps;
-                    const x = lastX + (targetX - lastX) * t;
-                    const y = lastY + (targetY - lastY) * t;
-                    addPoint(x, y);
+                    const interpX = lastX + (targetX - lastX) * t;
+                    const interpY = lastY + (targetY - lastY) * t;
+                    addPoint(interpX, interpY);
                 }
                 lastX = targetX;
                 lastY = targetY;
@@ -958,26 +1083,106 @@
                 lastY = targetY;
             }
             updatePoints();
-            drawWave();
-            requestAnimationFrame(animate);
+            drawFlowLine();
+            animationId = requestAnimationFrame(animateTrail);
         }
         
-        setTimeout(() => { if (canvas) animate(); }, 100);
-        window.addEventListener('beforeunload', () => { animationRunning = false; });
+        addPoint(mouseX, mouseY);
+        lastX = mouseX;
+        lastY = mouseY;
+        animateTrail();
+        
+        window.addEventListener('beforeunload', () => {
+            if (animationId) cancelAnimationFrame(animationId);
+        });
     })();
     
-    // Draggable Skills (keeping original functionality)
+    // ===== MOBILE ABOUT SECTION CARD ANIMATIONS =====
+    function initMobileCardAnimations() {
+        // Check if we're on mobile
+        if (window.innerWidth > 768) return;
+        
+        // Select all about cards within the about section
+        const aboutCards = document.querySelectorAll('#about .about-card');
+        
+        if (!aboutCards.length) return;
+        
+        // Set initial styles for cards (already handled by CSS)
+        // Add stagger delay classes or handle via Intersection Observer with delay
+        
+        // Create Intersection Observer
+        const observerOptions = {
+            threshold: 0.2,        // Trigger when 20% of card is visible
+            rootMargin: '0px 0px -20px 0px'  // Slight offset for better timing
+        };
+        
+        const delayIncrement = 120; // milliseconds between each card
+        
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const card = entry.target;
+                    const cardIndex = Array.from(aboutCards).indexOf(card);
+                    
+                    // Add staggered delay based on card position
+                    const delay = cardIndex * delayIncrement;
+                    
+                    setTimeout(() => {
+                        card.classList.add('animate-in');
+                    }, delay);
+                    
+                    // Unobserve after animation is triggered
+                    cardObserver.unobserve(card);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe each about card
+        aboutCards.forEach(card => {
+            cardObserver.observe(card);
+        });
+        
+        // Handle window resize - reinitialize if switching from desktop to mobile
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (window.innerWidth <= 768) {
+                    // Reset and re-observe cards
+                    aboutCards.forEach(card => {
+                        card.classList.remove('animate-in');
+                        cardObserver.observe(card);
+                    });
+                } else {
+                    // On desktop, remove animations
+                    aboutCards.forEach(card => {
+                        card.classList.remove('animate-in');
+                    });
+                }
+            }, 250);
+        });
+    }
+    
+    // Draggable Skills - Touch optimized for mobile
     const draggableSkillsList = ["Web Development", "UI-UX Design", "Data Analysis", "Embedded Engineering", "Network Engineering", "IT Support", "Wireframing", "Prototyping", "Graphics Design"];
     const skillSolidColors = ["#3B82F6", "#8B5CF6", "#10B981", "#F97316", "#EF4444", "#EC4899", "#14B8A6", "#6366F1", "#EAB308", "#06B6D4", "#A855F7", "#F43F5E"];
     const dragContainer = document.getElementById("skillsDragContainer");
+    
     function getRandomPosition(container, pillWidth, pillHeight) { 
         const maxX = container.clientWidth - pillWidth - 20; 
         const maxY = container.clientHeight - pillHeight - 40;  
         return { x: Math.max(10, Math.random() * maxX), y: Math.max(10, Math.random() * maxY) }; 
     }
+    
+    // Make draggable - supports both mouse and touch events
     function makeDraggable(element, container) { 
-        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0; 
-        element.onmousedown = dragMouseDown; 
+        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        
+        // Mouse events
+        element.onmousedown = dragMouseDown;
+        // Touch events for mobile
+        element.ontouchstart = dragTouchStart;
+        
         function dragMouseDown(e) { 
             e.preventDefault(); 
             e.stopPropagation(); 
@@ -987,13 +1192,39 @@
             document.onmousemove = elementDrag; 
             element.style.cursor = 'grabbing'; 
             element.style.zIndex = '100'; 
-        } 
+        }
+        
+        function dragTouchStart(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const touch = e.touches[0];
+            pos3 = touch.clientX;
+            pos4 = touch.clientY;
+            document.ontouchend = closeDragElementTouch;
+            document.ontouchmove = elementDragTouch;
+            element.style.zIndex = '100';
+        }
+        
         function elementDrag(e) { 
             e.preventDefault(); 
             pos1 = pos3 - e.clientX; 
             pos2 = pos4 - e.clientY; 
             pos3 = e.clientX; 
             pos4 = e.clientY; 
+            updateElementPosition();
+        }
+        
+        function elementDragTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            pos1 = pos3 - touch.clientX;
+            pos2 = pos4 - touch.clientY;
+            pos3 = touch.clientX;
+            pos4 = touch.clientY;
+            updateElementPosition();
+        }
+        
+        function updateElementPosition() {
             let newTop = element.offsetTop - pos2; 
             let newLeft = element.offsetLeft - pos1; 
             const maxLeft = container.clientWidth - element.offsetWidth - 10; 
@@ -1002,14 +1233,22 @@
             newTop = Math.min(Math.max(5, newTop), maxTop); 
             element.style.top = newTop + "px"; 
             element.style.left = newLeft + "px"; 
-        } 
+        }
+        
         function closeDragElement() { 
             document.onmouseup = null; 
             document.onmousemove = null; 
             element.style.cursor = 'grab'; 
             element.style.zIndex = '10'; 
-        } 
+        }
+        
+        function closeDragElementTouch() {
+            document.ontouchend = null;
+            document.ontouchmove = null;
+            element.style.zIndex = '10';
+        }
     }
+    
     function createDraggablePills() { 
         if (!dragContainer) return; 
         dragContainer.innerHTML = ''; 
@@ -1031,7 +1270,9 @@
             makeDraggable(pill, dragContainer); 
         }); 
     }
+    
     setTimeout(() => { if (dragContainer) createDraggablePills(); }, 100);
+    
     window.addEventListener('resize', () => { 
         const pills = document.querySelectorAll('.skill-pill-draggable'); 
         pills.forEach(pill => { 
@@ -1168,6 +1409,9 @@
     }
     updateIST();
     setInterval(updateIST, 1000);
+    
+    // Initialize mobile card animations
+    initMobileCardAnimations();
 </script>
 </body>
-</html>
+</html>  
